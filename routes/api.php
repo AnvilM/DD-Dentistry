@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DentistController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //Admin routes
-Route::prefix('admin')->group(function ()
+Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function ()
 {
     //Appointment routes
     Route::prefix('appointment')->controller(AppointmentController::class)->group(function ()
