@@ -1,0 +1,383 @@
+openapi: 3.0.3
+info:
+  title: Спидран по ЦК 1.0
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+tags:
+  - name: Appointment
+    description: Appointments to dentists
+    
+  - name: Dentists
+    description: Dentists list
+    
+  - name: Services
+    description: List of dentists services
+paths:
+  /public/appointment:
+    post:
+      tags:
+        - Appointment
+      summary: Create new appointment
+      description: Create new appointment
+      requestBody:
+        description: Create new appointment
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+  /admin/appointment:
+    get:
+      tags:
+        - Appointment
+      summary: Get all appointments
+      description: Get all appointments
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+  /admin/appointment/{id}:
+    get:
+      tags:
+        - Appointment
+      summary: Get appointment by id
+      description: Get appointment by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of appointment
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '400':
+          description: Invalid id
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+  /public/dentist:
+    get:
+      tags:
+        - Dentists
+      summary: Get all dentists
+      description: Get all dentists
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dentist'          
+  /public/dentist/{id}:
+    get:
+      tags:
+        - Dentists
+      summary: Get dentist by id
+      description: Get dentist by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of dentist
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dentist'
+        '400':
+          description: Invalid id
+  /admin/dentist:
+    post:
+      tags:
+        - Dentists
+      summary: Create new dentist
+      description: Create new dentist
+      requestBody:
+        description: Create new dentist
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Dentist'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+      security:
+        - Authorization: []
+  /admin/dentist/{id}:
+    put:
+      tags:
+        - Dentists
+      summary: Update dentist by id
+      description: Update dentist by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of dentist
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update dentist by id
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Dentist'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - Dentists
+      summary: Delete dentist by id
+      description: Delete dentist by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of dentist
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+  /public/service:
+    get:
+      tags:
+        - Services
+      summary: Get all services
+      description: Get all services
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'          
+  /public/service/{id}:
+    get:
+      tags:
+        - Services
+      summary: Get services by id
+      description: Get services by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of services
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: Invalid id
+  /admin/service:
+    post:
+      tags:
+        - Services
+      summary: Create new service
+      description: Create new service
+      requestBody:
+        description: Create new service
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+      security:
+        - Authorization: []
+  /admin/service/{id}:
+    put:
+      tags:
+        - Services
+      summary: Update service by id
+      description: Update service by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of service
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update service by id
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Service'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+    delete:
+      tags:
+        - Services
+      summary: Delete service by id
+      description: Delete service by id
+      parameters:
+        - name: id
+          in: path
+          description: ID of service
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid id
+        '403':
+          description: Unauthorized
+      security:
+        - Authorization: []
+
+
+        
+components:
+  schemas:
+    
+    Appointment:
+      required:
+        - dentist
+        - service
+        - name
+        - phone
+      type: object
+      properties:
+        dentist:
+          description: ФИО Доктора к которому записался клиент
+          type: integer
+          format: int64
+          example: 1
+        service:
+          description: Услуга, на которую записался клиент
+          type: integer
+          format: int64
+          example: 1
+        name:
+          description: ФИО клиента
+          type: string
+          example: Алексей Лапкин хапх
+        phone:
+          description: Номер телефона клиента
+          type: string
+          example: +71234567890
+    Dentist:
+      required:
+        - name
+        - position
+        - bio
+        - services
+      type: object
+      properties:
+        name:
+          description: ФИО доктора
+          type: string
+          example: Алексей Лапкин (Доктор)
+        position:
+          description: Должность врача
+          type: string
+          example: Главный врач
+        bio:
+          description: Описание доктора
+          type: string
+          example: Описание врача типо подробная информация
+        services:
+          description: JSON массив услуг, которые выполняет доктор
+          type: string
+          example: [1,2,3]
+    
+    Service:
+      required:
+        - name
+        - price
+        - description
+        - dentists
+      type: object
+      properties:
+        name:
+          description: Название услуги
+          type: string
+          example: Проверка зрения
+        price:
+          description: Цена
+          type: integer
+          format: int64
+          example: 1200
+        description:
+          description: Описание услуги
+          type: string
+          example: Описание услуги типо подробная информация
+        dentists:
+          description: JSON массив докторов, выполняющих эту услугу
+          type: string
+          example: [1,2,3]
+            
+
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      name: Authorization
+      in: header
