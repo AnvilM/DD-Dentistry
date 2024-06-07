@@ -294,7 +294,7 @@ paths:
         - Authorization: []
 
 
-        
+
 components:
   schemas:
     
@@ -378,6 +378,7 @@ components:
 
   securitySchemes:
     Authorization:
+      description: <b>apiKey должен быть вида Bearer {key}<br> Например Bearer m4VNNeBYTMWbpfqIQpwSJRzXzthp1535b+vzaZAOEcA=</b>
       type: apiKey
       name: Authorization
       in: header
