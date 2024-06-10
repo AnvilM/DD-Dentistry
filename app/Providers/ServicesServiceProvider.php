@@ -13,6 +13,7 @@ class ServicesServiceProvider extends ServiceProvider
     {
         $this->app->bind(\App\Http\Contracts\Services\AppointmentServiceContract::class, \App\Http\Services\AppointmentService::class);
         $this->app->bind(\App\Http\Contracts\Services\DentistServiceContract::class, \App\Http\Services\DentistService::class);
+        $this->app->bind(\App\Http\Contracts\Services\ServicesServiceContract::class, \App\Http\Services\ServicesService::class);
     }
 
     /**
