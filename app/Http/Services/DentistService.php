@@ -32,7 +32,8 @@ class DentistService implements DentistServiceContract
             'name' => 'required|string',
             'position' => 'required|string',
             'bio' => 'required|string',
-            'services' => 'required|json'
+            'services' => 'required|json',
+            'image' => 'required|url'
         ]);
 
         if ($validated->fails())
@@ -47,7 +48,7 @@ class DentistService implements DentistServiceContract
 
 
 
-    public function create(string $name, string $position, string $bio, string $services): void
+    public function create(string $name, string $position, string $bio, string $services, string $image): void
     {
         $Dentist = new Dentist();
 
@@ -55,6 +56,7 @@ class DentistService implements DentistServiceContract
         $Dentist->position = $position;
         $Dentist->bio = $bio;
         $Dentist->services = $services;
+        $Dentist->image = $image;
 
         $Dentist->save();
     }

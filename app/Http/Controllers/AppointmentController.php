@@ -6,6 +6,7 @@ use App\Http\Contracts\Services\AppointmentServiceContract;
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AppointmentController extends Controller
 {

@@ -43,5 +43,5 @@ interface ServicesServiceContract
      * 
      * @return void
      */
-    public function create(string $name, int $price, string $description, string $dentists): void;
+    public function create(string $name, int $price, string $description, string $dentists, string $image): void;
 }

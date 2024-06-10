@@ -48,8 +48,9 @@ class DentistController extends Controller
                 $position = $request->post('position');
                 $bio = $request->post('bio');
                 $services = $request->post('services');
+                $image = $request->post('image');
 
-                $dentistService->create($name, $position, $bio, $services);
+                $dentistService->create($name, $position, $bio, $services, $image);
             }
         }
         catch (ValidationException $e)
@@ -72,12 +73,14 @@ class DentistController extends Controller
                 $position = $request->post('position');
                 $bio = $request->post('bio');
                 $services = $request->post('services');
+                $image = $request->post('image');
 
                 Dentist::where('id', $request->route('id'))->update([
                     'name' => $name,
                     'position' => $position,
                     'bio' => $bio,
-                    'services' => $services
+                    'services' => $services,
+                    'image' => $image
                 ]);
             }
         }

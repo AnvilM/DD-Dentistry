@@ -48,8 +48,9 @@ class ServiceController extends Controller
                 $price = $request->post('price');
                 $description = $request->post('description');
                 $dentists = $request->post('dentists');
+                $image = $request->post('image');
 
-                $servicesService->create($name, $price, $description, $dentists);
+                $servicesService->create($name, $price, $description, $dentists, $image);
             }
         }
         catch (ValidationException $e)
@@ -72,12 +73,14 @@ class ServiceController extends Controller
                 $price = $request->post('price');
                 $description = $request->post('description');
                 $dentists = $request->post('dentists');
+                $image = $request->post('image');
 
                 Service::where('id', $request->route('id'))->update([
                     'name' => $name,
                     'price' => $price,
                     'description' => $description,
-                    'dentists' => $dentists
+                    'dentists' => $dentists,
+                    'image' => $image
                 ]);
             }
         }

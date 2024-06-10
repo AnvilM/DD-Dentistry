@@ -32,7 +32,8 @@ class ServicesService implements ServicesServiceContract
             'name' => 'required|string',
             'price' => 'required|integer',
             'description' => 'required|string',
-            'dentists' => 'required|json'
+            'dentists' => 'required|json',
+            'image' => 'required|url'
         ]);
 
         if ($validated->fails())
@@ -47,7 +48,7 @@ class ServicesService implements ServicesServiceContract
 
 
 
-    public function create(string $name, int $price, string $description, string $dentists): void
+    public function create(string $name, int $price, string $description, string $dentists, string $image): void
     {
         $Service = new Service();
 
@@ -55,6 +56,7 @@ class ServicesService implements ServicesServiceContract
         $Service->price = $price;
         $Service->description = $description;
         $Service->dentists = $dentists;
+        $Service->image = $image;
 
         $Service->save();
     }

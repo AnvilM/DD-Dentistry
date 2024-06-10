@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('position');
             $table->string('bio');
             $table->json('services');
+            $table->string('image')->default(url('assets/images/dentists/default.png'));
             $table->timestamps();
         });
     }
