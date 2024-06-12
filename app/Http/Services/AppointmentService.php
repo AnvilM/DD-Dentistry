@@ -15,6 +15,20 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AppointmentService implements AppointmentServiceContract
 {
+    public function validateId(int $id): bool
+    {
+        $validated = Validator::make(['id' => $id], ['id' => 'required|integer|exists:appointments,id']);
+
+        if ($validated->fails())
+        {
+            throw new ValidationException($validated->messages(), 400);
+        }
+
+        return true;
+    }
+
+
+
     public function create(int $dentist, int $service, string $name, string $phone): void
     {
         $Appointment = new Appointment();

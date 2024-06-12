@@ -33,6 +33,9 @@ Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function ()
 
         //Get appointment by id
         Route::get('{id}', 'show');
+
+        //Delete appointment by id
+        Route::delete('{id}', 'delete');
     });
 
 

@@ -28,4 +28,18 @@ interface AppointmentServiceContract
      * @return bool
      */
     public function validate(): bool;
+
+
+
+
+
+    /**
+     * Checks if appointment exists
+     *
+     * @param  int $id
+     * 
+     * @throws ValidationException
+     * @return bool
+     */
+    public function validateId(int $id): bool;
 }

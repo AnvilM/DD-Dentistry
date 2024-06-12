@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Contracts\Services\AppointmentServiceContract;
+use App\Models\Appointment;
+use Dotenv\Exception\ValidationException;
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
@@ -12,16 +14,26 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        //
+        return response()->json(Appointment::all());
     }
 
 
 
 
 
-    public function show()
+    public function show(Request $request, AppointmentServiceContract $appointmentService)
     {
-        //
+        try
+        {
+            if ($appointmentService->validateId($request->route('id')))
+            {
+                return response()->json(Appointment::where('id', $request->route('id'))->first());
+            }
+        }
+        catch (ValidationException $e)
+        {
+            throw new HttpResponseException(response($e->getMessage(), $e->getCode()));
+        }
     }
 
 
@@ -45,5 +57,13 @@ class AppointmentController extends Controller
         $phone = $request->post('phone');
 
         $appointmentService->create($dentist, $service, $name, $phone);
+    }
+
+
+
+
+    public function delete(Request $request)
+    {
+        Appointment::where('id', $request->route('id'))->delete();
     }
 }
